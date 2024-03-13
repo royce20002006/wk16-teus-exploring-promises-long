@@ -1,21 +1,45 @@
 /* ============================== Phase 1 ============================== */
 /* -------------------------- exploring async -------------------------- */
 
-// Your code here 
+function num1() {
+    return 5;
+} 
 
+async function num2() {
+    return 10;
+}
+
+console.log("num1", num1());
+console.log("num2", num2());
+num2().then(result => console.log(result));
 
 
 /* ============================== Phase 2 ============================== */
 /* -------------------------- exploring await -------------------------- */
 
-// Your code here 
+async function waiting() {
+    const value = await num2();
+    console.log("waiting", value);
+}
+
+waiting();
 
 
 
 /* ============================== Phase 3 ============================== */
 /* --------------------- creating a custom Promise --------------------- */
 
-// Your code here 
+async function waitForMyPromise() {
+    const promise = new Promise((resolved) => {
+        setTimeout(()=>{
+            resolved("Class is nearly over!");
+        }, 1000)
+    });
+
+    const result = await promise;
+    console.log("my promise is", result);
+}
+waitForMyPromise();
 
 
 
