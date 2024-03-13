@@ -46,21 +46,48 @@ waitForMyPromise();
 /* ============================== Phase 4 ============================== */
 /* -------------------------- exploring then --------------------------- */
 
-// Your code here 
+new Promise ((res) => {
+    setTimeout(() => {
+        res('phase 4');
+    }, 1500)
+}).then(r => console.log('then my other promise is', r));
 
 
 
 /* ============================== Phase 5 ============================== */
 /* ------------------- turn setTimeout into a Promise ------------------ */
 
-// Your code here 
+function waitAgain(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function heyo() {
+    console.log('waiting for now');
+    await waitAgain(2000);
+    console.log('done with waiting');
+}
+
+heyo();
 
 
 
 /* ============================== Phase 6 ============================== */
 /* -------------------- exploring reject and .catch -------------------- */
 
-// Your code here 
+const tryRandomPromise = (random) => new Promise((res, rej) => {
+    if (random > 0.5) {
+        res('success!!!');
+    } else {
+        rej('random error');
+    }
+});
+
+for (let i = 1; i < 10; i++) {
+    const random = Math.random();
+    waitAgain(2000 + random * 1000).then(() => tryRandomPromise(random))
+    .then((result) => console.log('random try #', i, result))
+    .catch(error => console.error('random try #', i, error));
+}
 
 
 
